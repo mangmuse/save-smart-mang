@@ -45,7 +45,6 @@ export default function ExpenseSummary({ expenses }) {
                 backgroundColor: item.color,
                 width: `${item.percentage}%`,
               }}
-              $width={item.percentage}
             />
           ))}
         </div>

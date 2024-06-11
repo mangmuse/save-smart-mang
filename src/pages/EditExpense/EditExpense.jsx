@@ -5,10 +5,15 @@ import InputContainer from "../../components/\bInputContainer/InputContainer";
 import { deleteExpense, updateExpense } from "../../store/expensesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button/Button";
+import useExpensesStore from "../../store/expensesStore";
 
 export default function EditExpense() {
   const dispatch = useDispatch();
-  const expenses = useSelector((state) => state.expenses);
+  // const expenses = useSelector((state) => state.expenses);
+  const expenses = useExpensesStore((state) => state.expenses);
+  const updateExpense = useExpensesStore((state) => state.updateExpense);
+  const deleteExpense = useExpensesStore((state) => state.deleteExpense);
+  console.log(expenses);
   const navigate = useNavigate();
   const { productId } = useParams();
 
@@ -34,7 +39,7 @@ export default function EditExpense() {
       alert("asd");
       return;
     }
-    dispatch(updateExpense(formState));
+    updateExpense(formState);
     navigate(-1);
   };
 
@@ -49,7 +54,7 @@ export default function EditExpense() {
       return;
     }
 
-    dispatch(deleteExpense(productId));
+    deleteExpense(productId);
     navigate("/");
   };
 

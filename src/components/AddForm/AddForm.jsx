@@ -3,11 +3,11 @@ import { v4 as uuid } from "uuid";
 import { checkValidate } from "../../utils/checkValidate";
 import InputContainer from "../InputContainer/InputContainer";
 import { addExpense } from "../../store/expensesSlice";
-import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
+import useExpensesStore from "../../store/expensesStore";
 
 export default function AddForm() {
-  const dispatch = useDispatch();
+  const addExpense = useExpensesStore((state) => state.addExpense);
   const initialFormState = {
     date: "",
     item: "",
@@ -32,7 +32,7 @@ export default function AddForm() {
       ...formState,
       amount: parseFloat(formState.amount),
     };
-    dispatch(addExpense(newExpense));
+    addExpense(newExpense);
     setFormState(initialFormState);
   };
 

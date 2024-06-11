@@ -2,10 +2,11 @@ import { useParams } from "react-router-dom";
 import ExpenseCard from "../../components/ExpenseCard/ExpenseCard";
 import ExpenseSummary from "../../components/ExpenseSummary/ExpenseSummary";
 import { useSelector } from "react-redux";
+import useExpensesStore from "../../store/expensesStore";
 
 export default function Expenses() {
   const { month } = useParams();
-  const expenses = useSelector((state) => state.expenses);
+  const expenses = useExpensesStore((state) => state.expenses);
   const filteredData = expenses
     .filter((data) => {
       const expenseMonth = new Date(data.date).getMonth() + 1;

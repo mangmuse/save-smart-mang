@@ -1,11 +1,12 @@
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { createJSONStorage, persist } from "zustand/middleware";
+import initialExpenseData from "../data/fakedata.json";
 
 const useExpensesStore = create(
   persist(
     immer((set) => ({
-      expenses: [],
+      expenses: initialExpenseData,
       addExpense: (newExpense) =>
         set((state) => {
           state.expenses.push(newExpense);
@@ -19,10 +20,15 @@ const useExpensesStore = create(
             state.expenses[index] = updatedExpense;
           }
         }),
-      deleteExpense: (toBeDeletedId) => {
-        return state.filter((exp) => exp.id !== toBeDeletedId);
-      },
-    }))
+      deleteExpense: (toBeDeletedId) =>
+        set((state) => ({
+          expenses: state.expenses.filter((exp) => exp.id !== toBeDeletedId),
+        })),
+    })),
+    {
+      name: "expenses",
+      storage: createJSONStorage(() => localStorage),
+    }
   )
 );
 
