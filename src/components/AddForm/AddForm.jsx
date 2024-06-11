@@ -2,7 +2,6 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { checkValidate } from "../../utils/checkValidate";
 import InputContainer from "../InputContainer/InputContainer";
-import { addExpense } from "../../store/expensesSlice";
 import Button from "../Button/Button";
 import useExpensesStore from "../../store/expensesStore";
 
