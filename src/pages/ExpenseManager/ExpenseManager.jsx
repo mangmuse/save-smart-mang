@@ -4,7 +4,7 @@ import Months from "../../components/Months/Months";
 
 export default function ExpenseManager() {
   return (
-    <div>
+    <div className="flex flex-col p-8  max-w-200 rounded-2xl">
       <AddForm />
       <Months />
       <Outlet />

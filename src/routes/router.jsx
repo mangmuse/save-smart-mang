@@ -4,6 +4,7 @@ import EditExpense from "../pages/EditExpense/EditExpense";
 import ExpenseManager from "../pages/ExpenseManager/ExpenseManager";
 import Expenses from "../pages/Expenses/Expenses";
 import ErrorPage from "../pages/ErrorPage";
+import AuthPage from "../pages/AuthPage";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "expenses/edit/:productId",
         element: <EditExpense />,
+      },
+      {
+        path: "auth",
+        element: <AuthPage />,
       },
     ],
   },
