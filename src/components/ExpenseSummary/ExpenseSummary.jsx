@@ -1,13 +1,5 @@
 import { useParams } from "react-router-dom";
-import {
-  ExpenseItem,
-  ExpenseItemDetail,
-  ExpenseItemWrapper,
-  ItemColor,
-  TotalExpense,
-  TotalExpenseGraph,
-  Wrapper,
-} from "./ExpenseSummary.styled";
+
 import { formatNumberWithCommas } from "../../utils/formatNumberWithCommas";
 import { useMemo } from "react";
 import { scaleOrdinal, schemeCategory10 } from "d3";
@@ -39,33 +31,40 @@ export default function ExpenseSummary({ expenses }) {
   }, [expenses, totalAmount]);
 
   return (
-    <Wrapper>
-      <TotalExpense>
+    <section className="flex gap-5 p-5 flex-col rounded-2xl mb-5 items-center bg-white">
+      <h3 className="text-lg font-bold">
         {month}월 총 지출: {formatNumberWithCommas(totalAmount)} 원
-      </TotalExpense>
+      </h3>
       {
-        <TotalExpenseGraph>
+        <div className="flex w-full h-10 bg-gray-200 rounded-lg overflow-hidden">
           {itemAmounts.map((item, index) => (
-            <ExpenseItem
+            <div
+              className="flex h-full "
               key={index}
-              $bgColor={item.color}
+              style={{
+                backgroundColor: item.color,
+                width: `${item.percentage}%`,
+              }}
               $width={item.percentage}
             />
           ))}
-        </TotalExpenseGraph>
+        </div>
       }
-      <ExpenseItemWrapper>
+      <div className="flex justify-center items-center flex-wrap w-4/5 gap-5">
         {itemAmounts.length > 0 &&
           itemAmounts.map((item, index) => (
-            <ExpenseItemDetail key={index}>
-              <ItemColor $bgColor={item.color} />
+            <li className="flex text-sm items-center fontsemi" key={index}>
+              <div
+                className="w-5 h-2.5 flex mr-1"
+                style={{ backgroundColor: item.color }}
+              />
               <p>
                 {item.item}: {formatNumberWithCommas(item.amount)} (
                 {item.percentage.toFixed(2)}%)
               </p>
-            </ExpenseItemDetail>
+            </li>
           ))}
-      </ExpenseItemWrapper>
-    </Wrapper>
+      </div>
+    </section>
   );
 }

@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { checkValidate } from "../../utils/checkValidate";
-import { Wrapper } from "./AddForm.styled";
 import InputContainer from "../InputContainer/InputContainer";
-import { Button } from "../Button/Button.styled";
 import { addExpense } from "../../store/expensesSlice";
 import { useDispatch } from "react-redux";
+import Button from "../Button/Button";
 
 export default function AddForm() {
   const dispatch = useDispatch();
@@ -38,7 +37,10 @@ export default function AddForm() {
   };
 
   return (
-    <Wrapper onSubmit={handleSubmit}>
+    <form
+      className="flex justify-center items-end w-full box-border p-5 gap-3 rounded-2xl mb-5 bg-white"
+      onSubmit={handleSubmit}
+    >
       <InputContainer
         onChange={handleChange}
         id="date"
@@ -70,8 +72,7 @@ export default function AddForm() {
         labelText="내용"
         placeHolder="지출 내용"
       />
-
-      <Button $btnType="submit">저장</Button>
-    </Wrapper>
+      <Button name="submit">저장</Button>
+    </form>
   );
 }

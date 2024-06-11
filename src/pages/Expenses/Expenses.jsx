@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import ExpenseCard from "../../components/ExpenseCard/ExpenseCard";
 import ExpenseSummary from "../../components/ExpenseSummary/ExpenseSummary";
-import { ListWrapper, NoExpensesMessage, Wrapper } from "./Expenses.styled";
 import { useSelector } from "react-redux";
 
 export default function Expenses() {
@@ -14,9 +13,9 @@ export default function Expenses() {
     })
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   return (
-    <Wrapper>
+    <article className="w-full">
       <ExpenseSummary expenses={filteredData} />
-      <ListWrapper>
+      <section className="bg-white box-border rounded-2xl p-4 w-full h-full">
         {filteredData.length > 0 &&
           filteredData.map((ex) => (
             <ExpenseCard key={ex.id} data={ex}>
@@ -24,9 +23,11 @@ export default function Expenses() {
             </ExpenseCard>
           ))}
         {filteredData.length === 0 && (
-          <NoExpensesMessage>지출이 없습니다.</NoExpensesMessage>
+          <div className="flex justify-center items-center text-base text-gray-500 bg-gray-50 p-5 rounded-lg">
+            지출이 없습니다.
+          </div>
         )}
-      </ListWrapper>
-    </Wrapper>
+      </section>
+    </article>
   );
 }

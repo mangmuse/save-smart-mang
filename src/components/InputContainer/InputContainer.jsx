@@ -1,6 +1,6 @@
 import React from "react";
 import { MIN_DATE, MAX_DATE } from "../../constants/dateConstants";
-import { Input, Label, Wrapper } from "./InputContainer.styled";
+import clsx from "clsx";
 
 const InputContainer = React.forwardRef(
   (
@@ -17,10 +17,25 @@ const InputContainer = React.forwardRef(
     ref
   ) => {
     const isDate = id === "date";
+    const inputClasses = clsx(
+      "border",
+      "border-solid",
+      "border-gray-200",
+      "rounded-md",
+      "w-36",
+      "h-10",
+      "p-2",
+      {
+        "mb-4 w-full": isEditPage,
+      }
+    );
     return (
-      <Wrapper $isUncontrolled={isEditPage}>
-        <Label htmlFor={id}>{labelText}</Label>
-        <Input
+      <div className="flex flex-col">
+        <label className="text-sm mb-1" htmlFor="">
+          {labelText}
+        </label>
+        <input
+          className={inputClasses}
           id={id}
           onChange={onChange || undefined}
           value={value === undefined ? undefined : value}
@@ -30,9 +45,8 @@ const InputContainer = React.forwardRef(
           min={isDate ? MIN_DATE : undefined}
           max={isDate ? MAX_DATE : undefined}
           ref={ref}
-          $isEditPage={isEditPage}
         />
-      </Wrapper>
+      </div>
     );
   }
 );

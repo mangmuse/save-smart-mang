@@ -1,11 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { checkValidate } from "../../utils/checkValidate";
-import { BtnContainer, Wrapper } from "./EditExpense.styled";
-import { Button } from "../../components/Button/Button.styled";
 import InputContainer from "../../components/\bInputContainer/InputContainer";
 import { deleteExpense, updateExpense } from "../../store/expensesSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Button from "../../components/Button/Button";
 
 export default function EditExpense() {
   const dispatch = useDispatch();
@@ -68,7 +67,10 @@ export default function EditExpense() {
     }
   }, [expenses, productId, navigate]);
   return (
-    <Wrapper onSubmit={handleSubmit}>
+    <form
+      className="flex flex-col items-stretch bg-white rounded-2xl p-5 w-200 h-100"
+      onSubmit={handleSubmit}
+    >
       <InputContainer
         id="date"
         type="date"
@@ -97,17 +99,17 @@ export default function EditExpense() {
         ref={(el) => (refs.current.description = el)}
         isEditPage
       />
-      <BtnContainer>
-        <Button type="submit" $btnType="submit">
+      <div className="flex gap-2">
+        <Button type="submit" name="submit">
           저장
         </Button>
-        <Button type="button" $btnType="delete" onClick={handleDelete}>
+        <Button type="button" name="delete" onClick={handleDelete}>
           삭제
         </Button>
-        <Button type="button" $btnType="go-back" onClick={() => navigate(-1)}>
+        <Button type="button" name="go-back" onClick={() => navigate(-1)}>
           뒤로가기
         </Button>
-      </BtnContainer>
-    </Wrapper>
+      </div>
+    </form>
   );
 }
