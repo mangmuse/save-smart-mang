@@ -1,8 +1,8 @@
 import { devtools } from "zustand/middleware";
 import { create } from "zustand";
 
-const savedUser = localStorage.getItem("user");
 const token = sessionStorage.getItem("token");
+const savedUser = token ? localStorage.getItem("user") : null;
 
 const useUserStore = create((set) => ({
   user: savedUser ? JSON.parse(savedUser) : null,

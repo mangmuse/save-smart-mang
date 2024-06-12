@@ -17,6 +17,7 @@ export default function EditExpense() {
   const deleteExpense = useExpensesStore((state) => state.deleteExpense);
   const navigate = useNavigate();
   const { productId } = useParams();
+
   useQuery({
     queryKey: ["expnese"],
     queryFn: async () => {
@@ -26,7 +27,6 @@ export default function EditExpense() {
       return expense;
     },
   });
-
   const { mutateAsync: patchExpense } = useMutation({
     mutationFn: async ({ productId, updatedExpense }) => {
       return await expenseApi.patchExpense(productId, updatedExpense);
@@ -43,7 +43,7 @@ export default function EditExpense() {
       navigate(-1);
     },
   });
-  console.log(isEditable);
+
   const refs = useRef({
     date: null,
     item: null,
@@ -62,7 +62,6 @@ export default function EditExpense() {
       amount: refs.current.amount.value,
       description: refs.current.description.value,
     };
-    console.log(formState);
     if (!checkValidate(formState)) {
       alert("asd");
       return;
