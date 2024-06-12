@@ -4,8 +4,14 @@ import { checkValidate } from "../../utils/checkValidate";
 import InputContainer from "../InputContainer/InputContainer";
 import Button from "../Button/Button";
 import useExpensesStore from "../../store/expensesStore";
+import useUserStore from "../../store/userStore";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import expenseApi from "../../api/expense.api";
 
 export default function AddForm() {
+  const navigate = useNavigate();
+  const user = useUserStore((state) => state.user);
   const addExpense = useExpensesStore((state) => state.addExpense);
   const initialFormState = {
     date: "",
@@ -15,23 +21,40 @@ export default function AddForm() {
   };
   const [formState, setFormState] = useState(initialFormState);
 
+  const { mutateAsync: postExpense } = useMutation({
+    mutationFn: (expense) => expenseApi.postExpense(expense),
+    onSuccess: (data) => {
+      alert("저장성공");
+      addExpense(data);
+    },
+  });
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormState((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    if (!user) {
+      alert("로그인 후에 가능합니다.");
+      navigate("/auth");
+      return;
+    }
     e.preventDefault();
+
     if (!checkValidate(formState)) {
       alert("asd");
       return;
     }
     const newExpense = {
       id: uuid(),
+      createdBy: user?.nickname,
       ...formState,
       amount: parseFloat(formState.amount),
+      userId: user.userId,
     };
-    addExpense(newExpense);
+
+    await postExpense(newExpense);
     setFormState(initialFormState);
   };
 

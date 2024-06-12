@@ -3,7 +3,7 @@ import { formatNumberWithCommas } from "../../utils/formatNumberWithCommas";
 import { Link } from "react-router-dom";
 
 export default function ExpenseCard({ data }) {
-  const { date, item, amount, description, id } = data;
+  const { date, item, amount, description, id, createdBy } = data;
 
   return (
     <Link
@@ -13,7 +13,7 @@ export default function ExpenseCard({ data }) {
       <div className="flex flex-col justify-between leading-4 w-10/12">
         <span className="text-sm mb-1 opacity-80">{date} </span>
         <span className="text-custom-blue font-bold">
-          {`${description} - ${item}`}
+          {`${description} - ${item} (${createdBy})`}
         </span>
       </div>
       <span className="text-custom-blue font-bold overflow-visible">

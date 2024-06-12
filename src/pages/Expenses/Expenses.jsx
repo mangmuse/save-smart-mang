@@ -2,10 +2,23 @@ import { useParams } from "react-router-dom";
 import ExpenseCard from "../../components/ExpenseCard/ExpenseCard";
 import ExpenseSummary from "../../components/ExpenseSummary/ExpenseSummary";
 import useExpensesStore from "../../store/expensesStore";
+import { useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import expenseApi from "../../api/expense.api";
 
 export default function Expenses() {
+  const queryClient = useQueryClient();
   const { month } = useParams();
   const expenses = useExpensesStore((state) => state.expenses);
+  const setExpenses = useExpensesStore((state) => state.setExpenses);
+  useQuery({
+    queryKey: ["expense"],
+    queryFn: async () => {
+      const data = await expenseApi.getExpenses();
+      setExpenses(data);
+      return res;
+    },
+  });
   const filteredData = expenses
     .filter((data) => {
       const expenseMonth = new Date(data.date).getMonth() + 1;

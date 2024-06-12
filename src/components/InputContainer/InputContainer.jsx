@@ -13,6 +13,7 @@ const InputContainer = React.forwardRef(
       placeHolder,
       defaultValue,
       isEditPage,
+      isEditable,
     },
     ref
   ) => {
@@ -31,12 +32,13 @@ const InputContainer = React.forwardRef(
     );
     return (
       <div className="flex flex-col">
-        <label className="text-sm mb-1" htmlFor="">
+        <label className="text-sm mb-1" htmlFor={id}>
           {labelText}
         </label>
         <input
           className={inputClasses}
           id={id}
+          disabled={!isEditable && isEditPage}
           onChange={onChange || undefined}
           value={value === undefined ? undefined : value}
           defaultValue={defaultValue}

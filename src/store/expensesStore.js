@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { createJSONStorage, persist, devtools } from "zustand/middleware";
+
 import initialExpenseData from "../data/fakedata.json";
 
-const savedExpenses = localStorage.getItem("expenses");
-
 const useExpensesStore = create(
-  persist(
+  devtools(
     immer((set) => ({
-      expenses: savedExpenses ? JSON.parse(savedExpenses) : [],
+      expenses: [],
+      setExpenses: (expenses) => set({ expenses }),
       addExpense: (newExpense) =>
         set((state) => {
           state.expenses.push(newExpense);
@@ -26,11 +26,7 @@ const useExpensesStore = create(
         set((state) => ({
           expenses: state.expenses.filter((exp) => exp.id !== toBeDeletedId),
         })),
-    })),
-    {
-      name: "expenses",
-      storage: createJSONStorage(() => localStorage),
-    }
+    }))
   )
 );
 
