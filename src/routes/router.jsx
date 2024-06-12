@@ -5,6 +5,7 @@ import ExpenseManager from "../pages/ExpenseManager/ExpenseManager";
 import Expenses from "../pages/Expenses/Expenses";
 import ErrorPage from "../pages/ErrorPage";
 import AuthPage from "../pages/AuthPage";
+import MyPage from "../pages/MyPage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "auth",
         element: <AuthPage />,
+      },
+      {
+        path: "mypage",
+        element: <MyPage />,
       },
     ],
   },

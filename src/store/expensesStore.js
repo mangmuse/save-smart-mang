@@ -3,10 +3,12 @@ import { immer } from "zustand/middleware/immer";
 import { createJSONStorage, persist } from "zustand/middleware";
 import initialExpenseData from "../data/fakedata.json";
 
+const savedExpenses = localStorage.getItem("expenses");
+
 const useExpensesStore = create(
   persist(
     immer((set) => ({
-      expenses: initialExpenseData,
+      expenses: savedExpenses ? JSON.parse(savedExpenses) : [],
       addExpense: (newExpense) =>
         set((state) => {
           state.expenses.push(newExpense);
