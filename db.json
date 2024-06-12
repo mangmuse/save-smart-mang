@@ -1,3 +1,21 @@
 {
-  "expenses": []
+  "expenses": [
+    {
+      "id": "b5137485-98ed-4d79-8fec-136ab1843f88",
+      "createdBy": "fwefewfewfewfewfewfewfewddsad",
+      "date": "2024-03-03",
+      "item": "asd",
+      "amount": "10000",
+      "description": "수정하기"
+    },
+    {
+      "id": "83cb5379-5fe1-4680-9420-221450137280",
+      "createdBy": "asddddd",
+      "date": "2024-03-03",
+      "item": "asdasd",
+      "amount": 1231231,
+      "description": "dsds",
+      "userId": "xptmxmdyd"
+    }
+  ]
 }

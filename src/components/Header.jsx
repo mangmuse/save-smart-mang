@@ -20,15 +20,29 @@ export default function Header() {
       signOut();
     }
   }, [token]);
+  console.log(user);
   return (
-    <header className="w-full mb-10 bg-gray-800 text-white">
-      {user && user.nickname}
-      <button
-        className="text-white"
-        onClick={user ? handleLogout : () => navigate("/auth")}
-      >
-        {user ? "로그아웃" : "로그인"}
-      </button>
+    <header className="flex justify-between items-center w-full h-14 px-5 mb-10 bg-gray-800 text-white">
+      <ul className="flex gap-5">
+        <Link to="/">HOME</Link>
+        <Link to="/mypage">내 프로필</Link>
+      </ul>
+      <div className="flex gap-5 items-center">
+        {user && (
+          <>
+            <div className="w-10 h-10 rounded-full">
+              <img src={user.avatar} alt="" />
+            </div>
+            <span className="text-ellipsis">{user.nickname}</span>
+          </>
+        )}
+        <button
+          className="bg-red-500 rounded-md w-20 h-9"
+          onClick={user ? handleLogout : () => navigate("/auth")}
+        >
+          {user ? "로그아웃" : "로그인"}
+        </button>
+      </div>
     </header>
   );
 }

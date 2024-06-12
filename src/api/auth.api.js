@@ -29,6 +29,21 @@ class AuthAPI {
     });
     return res.data;
   }
+
+  async editUser({ token, nickname, avatar }) {
+    const path = "/profile";
+    const res = await this.#client.patch(
+      path,
+      { nickname, avatar },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res.data;
+  }
 }
 
 const authApi = new AuthAPI();

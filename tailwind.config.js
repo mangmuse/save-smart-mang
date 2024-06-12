@@ -8,6 +8,7 @@ export default {
       },
       width: {
         26: "104px",
+        100: "400px",
         200: "800px",
       },
       height: {
