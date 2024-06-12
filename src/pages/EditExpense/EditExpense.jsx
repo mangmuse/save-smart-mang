@@ -22,7 +22,7 @@ export default function EditExpense() {
     queryKey: ["expnese"],
     queryFn: async () => {
       const expense = await expenseApi.getExpense(productId);
-      setIsEditable(expense?.userId === user.userId);
+      setIsEditable(expense?.createdBy === user.userId);
       setExpense(expense);
       return expense;
     },
@@ -35,6 +35,7 @@ export default function EditExpense() {
       updateExpense(updatedExpense);
       navigate(-1);
     },
+    onError: (e) => alert(e),
   });
   const { mutateAsync: removeExpense } = useMutation({
     mutationFn: async (productId) => await expenseApi.removeExpense(productId),
@@ -42,6 +43,7 @@ export default function EditExpense() {
       deleteExpense(productId);
       navigate(-1);
     },
+    onError: (e) => alert(e),
   });
 
   const refs = useRef({

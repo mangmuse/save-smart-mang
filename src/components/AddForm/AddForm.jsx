@@ -27,6 +27,7 @@ export default function AddForm() {
       alert("저장성공");
       addExpense(data);
     },
+    onError: (e) => alert(e),
   });
 
   const handleChange = (e) => {
@@ -48,10 +49,9 @@ export default function AddForm() {
     }
     const newExpense = {
       id: uuid(),
-      createdBy: user?.nickname,
+      createdBy: user?.userId,
       ...formState,
       amount: parseFloat(formState.amount),
-      userId: user.userId,
     };
 
     await postExpense(newExpense);

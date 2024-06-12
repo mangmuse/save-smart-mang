@@ -39,22 +39,46 @@ export default function AuthForm({ isLoginPage }) {
     navigate("/");
   };
   return (
-    <form onSubmit={handleAuth} className="flex gap-1">
-      <input value={id} onChange={(e) => setId(e.target.value)} type="text" />
-      <input
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        type="password"
-      />
-      {!isLoginPage && (
+    <form onSubmit={handleAuth} className="flex flex-col items-center gap-2">
+      <div className="w-full flex flex-col items-center">
+        <label htmlFor="id">아이디</label>
         <input
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
+          placeholder="id"
+          id="id"
+          className="border px-2 border-gray-500 w-11/12 rounded-md h-10"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
           type="text"
         />
+      </div>
+      <div className="w-full flex flex-col items-center ">
+        <label className="text-start" htmlFor="password">
+          비밀번호
+        </label>
+        <input
+          placeholder="password"
+          id="password"
+          className="border px-2 border-gray-500 w-11/12 rounded-md  h-10"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+        />
+      </div>
+      {!isLoginPage && (
+        <div className="w-full flex flex-col items-center ">
+          <label className="text-start" htmlFor="password">
+            닉네임
+          </label>
+          <input
+            className="border px-2 border-gray-500 w-11/12 rounded-md  h-10"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            type="text"
+          />
+        </div>
       )}
-      <button className="bg-gray-600">
-        {isLoginPage ? "로그인!" : "회원가입!"}
+      <button className="mt-16 bg-red-500 text-white text-xl w-11/12 h-12 rounded-md">
+        {isLoginPage ? "로그인" : "회원가입"}
       </button>
     </form>
   );

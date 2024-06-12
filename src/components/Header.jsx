@@ -3,13 +3,14 @@ import authApi from "../api/auth.api";
 import useUserStore from "../store/userStore";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useToken } from "../context/TokenContext";
 
 export default function Header() {
+  const { token } = useToken();
   const navigate = useNavigate();
   const signOut = useUserStore((state) => state.signOut);
   const user = useUserStore((state) => state.user);
-  const token = sessionStorage.getItem("token");
-  console.log(token);
+  // const token = sessionStorage.getItem("token");
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
@@ -25,7 +26,7 @@ export default function Header() {
     <header className="flex justify-between items-center w-full h-14 px-5 mb-10 bg-gray-800 text-white">
       <ul className="flex gap-5">
         <Link to="/">HOME</Link>
-        <Link to="/mypage">내 프로필</Link>
+        {user && <Link to="/mypage">내 프로필</Link>}
       </ul>
       <div className="flex gap-5 items-center">
         {user && (

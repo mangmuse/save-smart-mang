@@ -4,24 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import authApi from "../api/auth.api";
 import { validateNickname } from "../utils/checkValidate";
+import { useToken } from "../context/TokenContext";
 
 export default function MyPage() {
   const user = useUserStore((state) => state.user);
   const signIn = useUserStore((state) => state.signIn);
-  const isLoggedin = useUserStore((state) => state.isLoggedin);
-  const initialUserInfo = { nickname: user.nickname, avatar: null };
+  const initialUserInfo = { nickname: user?.nickname, avatar: null };
   const [userInfo, setUserInfo] = useState(initialUserInfo);
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("token");
-  console.log(user.avatar);
-  console.log(userInfo.avatar);
+  const { token } = useToken();
+
   const { mutateAsync: editUser } = useMutation({
     mutationFn: (userInfo) => authApi.editUser(userInfo),
     onSuccess: (data) => {
       alert("변경이 완료되었습니다.");
-      console.log(data);
-      signIn(data);
+      navigate("/");
     },
+    onError: (e) => alert(e),
   });
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -36,7 +35,7 @@ export default function MyPage() {
   const handleEditUser = async (e) => {
     e.preventDefault();
 
-    if (!token) {
+    if (!user) {
       alert("로그인이 필요합니다.");
       navigate("/auth");
       return;
@@ -54,13 +53,13 @@ export default function MyPage() {
     await editUser(edittedUserInfo);
   };
   useEffect(() => {
-    if (!isLoggedin) {
+    if (!user) {
       alert("로그인이 필요한 페이지입니다.");
       navigate("/auth");
     }
-  }, [isLoggedin]);
+  }, [user]);
 
-  if (!isLoggedin) {
+  if (!user) {
     return null;
   }
   return (
