@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import authApi from "../api/auth.api";
 import useUserStore from "../store/userStore";
-import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function useAuthMutation() {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://moneyfulpublicpolicy.co.kr";
+const BASE_URL = import.meta.env.VITE_AUTH_BASE_URL;
 
 class AuthAPI {
   #client;
