@@ -1,9 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
-import authApi from "../api/auth.api";
 import { useState } from "react";
-import useUserStore from "../store/userStore";
 import { useNavigate } from "react-router-dom";
-import useAuthMutation from "../hooks/useAuthMutation";
+import useAuthMutation from "../../hooks/useAuthMutation";
 import AuthInput from "./AuthInput";
 
 export default function AuthForm({ isLoginPage }) {

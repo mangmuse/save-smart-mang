@@ -15,14 +15,6 @@ export default function MyPage() {
   const { token } = useToken();
   const { editUser } = useAuthMutation();
 
-  // const { mutateAsync: editUser } = useMutation({
-  //   mutationFn: (userInfo) => authApi.editUser(userInfo),
-  //   onSuccess: (data) => {
-  //     alert("변경이 완료되었습니다.");
-  //     navigate("/");
-  //   },
-  //   onError: (e) => alert(e),
-  // });
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "avatar" && files.length > 0) {

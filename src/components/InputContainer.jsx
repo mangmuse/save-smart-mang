@@ -1,5 +1,5 @@
 import React from "react";
-import { MIN_DATE, MAX_DATE } from "../../constants/dateConstants";
+import { MIN_DATE, MAX_DATE } from "../constants/dateConstants";
 import clsx from "clsx";
 
 const InputContainer = React.forwardRef(

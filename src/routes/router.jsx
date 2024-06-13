@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import EditExpense from "../pages/EditExpense/EditExpense";
-import ExpenseManager from "../pages/ExpenseManager/ExpenseManager";
-import Expenses from "../pages/Expenses/Expenses";
+import EditExpense from "../pages/EditExpensePage";
+import ExpenseManager from "../pages/HomePage";
+import Expenses from "../pages/Expenses";
 import ErrorPage from "../pages/ErrorPage";
 import AuthPage from "../pages/AuthPage";
 import MyPage from "../pages/MyPage";
+import HomePage from "../pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "expenses",
-        element: <ExpenseManager />,
+        element: <HomePage />,
         children: [{ path: ":month", element: <Expenses /> }],
       },
       {

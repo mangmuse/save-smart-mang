@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { checkValidate } from "../../utils/checkValidate";
-import InputContainer from "../InputContainer/InputContainer";
-import Button from "../Button/Button";
+import InputContainer from "../InputContainer";
+import Button from "../Button";
 import useUserStore from "../../store/userStore";
 import { useNavigate } from "react-router-dom";
 import useExpenseMutation from "../../hooks/useExpenseMutation";
@@ -51,7 +51,7 @@ export default function AddForm() {
 
   return (
     <form
-      className="flex justify-center items-end w-full box-border p-5 gap-3 rounded-2xl mb-5 bg-white"
+      className="flex justify-center items-end w-full  flex-wrap box-border p-5 gap-3 rounded-2xl mb-5 bg-white"
       onSubmit={handleSubmit}
     >
       <InputContainer

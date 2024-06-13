@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AuthForm from "../components/AuthForm";
+import AuthForm from "../components/AuthPage/AuthForm";
 import useUserStore from "../store/userStore";
 import { useNavigate } from "react-router-dom";
 

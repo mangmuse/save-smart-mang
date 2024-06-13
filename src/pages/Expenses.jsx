@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
-import ExpenseCard from "../../components/ExpenseCard/ExpenseCard";
-import ExpenseSummary from "../../components/ExpenseSummary/ExpenseSummary";
-import useExpensesStore from "../../store/expensesStore";
-import { useEffect } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import expenseApi from "../../api/expense.api";
+import useExpensesStore from "../store/expensesStore";
+import { useQuery } from "@tanstack/react-query";
+import expenseApi from "../api/expense.api";
+import ExpenseCard from "../components/Expenses/ExpenseCard";
+import ExpenseSummary from "../components/Expenses/ExpenseSummary";
 
 export default function Expenses() {
   const { month } = useParams();

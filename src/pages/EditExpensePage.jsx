@@ -1,14 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { checkValidate } from "../../utils/checkValidate";
-import InputContainer from "../../components/\bInputContainer/InputContainer";
-import Button from "../../components/Button/Button";
-import useExpensesStore from "../../store/expensesStore";
-import useUserStore from "../../store/userStore";
+import { checkValidate } from "../utils/checkValidate";
+import InputContainer from "../components/InputContainer";
+import Button from "../components/Button";
+import useExpensesStore from "../store/expensesStore";
+import useUserStore from "../store/userStore";
 import { useQuery } from "@tanstack/react-query";
-import expenseApi from "../../api/expense.api";
-import useExpenseMutation from "../../hooks/useExpenseMutation";
-import useExpenseQuery from "../../hooks/useExpenseQuery";
+import expenseApi from "../api/expense.api";
+import useExpenseMutation from "../hooks/useExpenseMutation";
+import useExpenseQuery from "../hooks/useExpenseQuery";
 
 export default function EditExpense() {
   const { productId } = useParams();
@@ -72,7 +72,7 @@ export default function EditExpense() {
   }, [expenses, productId, navigate]);
   return (
     <form
-      className="flex flex-col items-stretch bg-white rounded-2xl p-5 w-200 h-100"
+      className="flex flex-col items-stretch bg-white rounded-2xl p-5 w-full max-w-200 h-100"
       onSubmit={handleSubmit}
     >
       <InputContainer
