@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import useUserStore from "../store/userStore";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import authApi from "../api/auth.api";
 import { validateNickname } from "../utils/checkValidate";
 import { useToken } from "../context/TokenContext";
 import useAuthMutation from "../hooks/useAuthMutation";
+import AuthInput from "../components/AuthPage/AuthInput";
 
 export default function MyPage() {
   const user = useUserStore((state) => state.user);
@@ -16,8 +15,8 @@ export default function MyPage() {
   const { editUser } = useAuthMutation();
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "avatar" && files.length > 0) {
+    const { id, value, files } = e.target;
+    if (id === "avatar" && files.length > 0) {
       setUserInfo((prev) => ({ ...prev, avatar: files[0] }));
     } else {
       setUserInfo((prev) => ({ ...prev, nickname: value }));
@@ -61,21 +60,30 @@ export default function MyPage() {
       className="flex flex-col items-center bg-white w-100  rounded-xl p-5"
     >
       <h3 className="text-xl mb-4">프로필 수정</h3>
-      <h4 className="text-lg">닉네임</h4>
-      <input
-        onChange={handleChange}
-        name="nickname"
-        value={userInfo.nickname}
-        type="text"
-        className="mb-4 px-2 h-9 border border-gray-400 rounded-md w-3/4"
-      />
-      <h4 className="text-lg">아바타 이미지</h4>
-      <input
-        name="avatar"
-        onChange={handleChange}
-        className=" w-3/4 mb-4"
-        type="file"
-      />
+
+      <div className="w-full flex items-center flex-col">
+        <label htmlFor="nickname" className="text-lg self-start ml-5">
+          닉네임
+        </label>
+        <input
+          onChange={handleChange}
+          id="nickname"
+          value={userInfo.nickname}
+          type="text"
+          className="mb-4 px-2 h-10 border border-gray-400 rounded-md w-11/12"
+        />
+      </div>
+      <div className="w-full flex items-center flex-col gap-2">
+        <label htmlFor="avatar" className="text-lg self-start ml-4">
+          아바타 이미지
+        </label>
+        <input
+          id="avatar"
+          onChange={handleChange}
+          className="self-start w-3/4 ml-4 mb-4"
+          type="file"
+        />
+      </div>
       <button className="w-11/12 h-9 rounded-md bg-blue-500 text-white">
         프로필 업데이트
       </button>
