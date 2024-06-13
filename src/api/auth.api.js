@@ -19,6 +19,7 @@ class AuthAPI {
   async login(userInfo) {
     const path = "/login";
     const res = await this.#client.post(path, userInfo);
+
     return res.data;
   }
 

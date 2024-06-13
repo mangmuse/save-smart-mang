@@ -5,23 +5,24 @@ import { useMutation } from "@tanstack/react-query";
 import authApi from "../api/auth.api";
 import { validateNickname } from "../utils/checkValidate";
 import { useToken } from "../context/TokenContext";
+import useAuthMutation from "../hooks/useAuthMutation";
 
 export default function MyPage() {
   const user = useUserStore((state) => state.user);
-  const signIn = useUserStore((state) => state.signIn);
   const initialUserInfo = { nickname: user?.nickname, avatar: null };
   const [userInfo, setUserInfo] = useState(initialUserInfo);
   const navigate = useNavigate();
   const { token } = useToken();
+  const { editUser } = useAuthMutation();
 
-  const { mutateAsync: editUser } = useMutation({
-    mutationFn: (userInfo) => authApi.editUser(userInfo),
-    onSuccess: (data) => {
-      alert("변경이 완료되었습니다.");
-      navigate("/");
-    },
-    onError: (e) => alert(e),
-  });
+  // const { mutateAsync: editUser } = useMutation({
+  //   mutationFn: (userInfo) => authApi.editUser(userInfo),
+  //   onSuccess: (data) => {
+  //     alert("변경이 완료되었습니다.");
+  //     navigate("/");
+  //   },
+  //   onError: (e) => alert(e),
+  // });
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "avatar" && files.length > 0) {

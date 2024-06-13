@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import authApi from "../api/auth.api";
 import useUserStore from "../store/userStore";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -10,8 +9,6 @@ export default function Header() {
   const navigate = useNavigate();
   const signOut = useUserStore((state) => state.signOut);
   const user = useUserStore((state) => state.user);
-  // const token = sessionStorage.getItem("token");
-
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     signOut();
@@ -21,7 +18,6 @@ export default function Header() {
       signOut();
     }
   }, [token]);
-  console.log(user);
   return (
     <header className="flex justify-between items-center w-full h-14 px-5 mb-10 bg-gray-800 text-white">
       <ul className="flex gap-5">
