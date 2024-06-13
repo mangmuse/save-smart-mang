@@ -3,34 +3,16 @@ import authApi from "../api/auth.api";
 import { useState } from "react";
 import useUserStore from "../store/userStore";
 import { useNavigate } from "react-router-dom";
+import useAuthMutation from "../hooks/useAuthMutation";
+import AuthInput from "./AuthInput";
 
 export default function AuthForm({ isLoginPage }) {
   const navigate = useNavigate();
-  const signIn = useUserStore((state) => state.signIn);
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
-  const { mutateAsync: signUp } = useMutation({
-    mutationFn: (userInfo) => authApi.signUp(userInfo),
-    onSuccess: (data) => {
-      alert(data.message);
-    },
-    onError: (e) => {
-      alert(e);
-      console.log(e);
-    },
-  });
-  const { mutateAsync: login } = useMutation({
-    mutationFn: (userInfo) => authApi.login(userInfo),
-    onSuccess: (data) => {
-      alert("럭인성공");
-      sessionStorage.setItem("token", data.accessToken);
-      signIn(data);
-    },
-    onError: (e) => {
-      console.log(e);
-    },
-  });
+  const { signUp, login } = useAuthMutation();
+
   const handleAuth = async (e) => {
     e.preventDefault();
     isLoginPage
@@ -40,44 +22,33 @@ export default function AuthForm({ isLoginPage }) {
   };
   return (
     <form onSubmit={handleAuth} className="flex flex-col items-center gap-2">
-      <div className="w-full flex flex-col items-center">
-        <label htmlFor="id">아이디</label>
-        <input
-          placeholder="id"
-          id="id"
-          className="border px-2 border-gray-500 w-11/12 rounded-md h-10"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          type="text"
-        />
-      </div>
-      <div className="w-full flex flex-col items-center ">
-        <label className="text-start" htmlFor="password">
-          비밀번호
-        </label>
-        <input
-          placeholder="password"
-          id="password"
-          className="border px-2 border-gray-500 w-11/12 rounded-md  h-10"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-        />
-      </div>
+      <AuthInput
+        placeholder="아이디를 입력해주세요"
+        value={id}
+        onChange={(e) => setId(e.target.value)}
+        type="text"
+      >
+        아이디
+      </AuthInput>
+      <AuthInput
+        placeholder="비밀번호를 입력해주세요"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        type="password"
+      >
+        비밀번호
+      </AuthInput>
       {!isLoginPage && (
-        <div className="w-full flex flex-col items-center ">
-          <label className="text-start" htmlFor="password">
-            닉네임
-          </label>
-          <input
-            className="border px-2 border-gray-500 w-11/12 rounded-md  h-10"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            type="text"
-          />
-        </div>
+        <AuthInput
+          placeholder="닉네임을 입력해주세요"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+          type="text"
+        >
+          닉네임
+        </AuthInput>
       )}
-      <button className="mt-16 bg-red-500 text-white text-xl w-11/12 h-12 rounded-md">
+      <button className="mt-2 bg-red-500 text-white text-xl w-11/12 h-14 rounded-md">
         {isLoginPage ? "로그인" : "회원가입"}
       </button>
     </form>

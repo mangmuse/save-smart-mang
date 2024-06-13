@@ -19,12 +19,15 @@ export default function AuthPage() {
         {isLoginPage ? "로그인" : "회원가입"}
       </h3>
       <AuthForm isLoginPage={isLoginPage} />
-      <div className="flex justify-center">
+      <div className="flex items-center justify-center  mt-4 font-bold gap-2">
+        <span className="">
+          {isLoginPage ? "회원이 아니신가요?" : "이미 회원이신가요?"}
+        </span>
         <span
-          className="cursor-pointer mt-4 font-bold  text-center"
           onClick={handleTogglePage}
+          className="text-blue-700 cursor-pointer"
         >
-          {isLoginPage ? "회원이 아니신가요?" : "아이디가 있으신가요?"}
+          {isLoginPage ? "회원가입" : "로그인"}
         </span>
       </div>
     </div>
