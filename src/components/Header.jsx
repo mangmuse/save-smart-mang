@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import useUserStore from "../store/userStore";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";

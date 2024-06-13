@@ -23,7 +23,6 @@ export default function useAuthMutation() {
     mutationFn: (userInfo) => authApi.login(userInfo),
     onSuccess: (data) => {
       alert("로그인이 완료되었습니다.");
-      console.log(data);
       sessionStorage.setItem("token", data.accessToken);
       signIn(data);
     },
@@ -35,7 +34,6 @@ export default function useAuthMutation() {
   const { mutateAsync: editUser } = useMutation({
     mutationFn: (userInfo) => authApi.editUser(userInfo),
     onSuccess: (data) => {
-      console.log(data);
       signIn(data);
       alert(data.message);
       navigate("/");

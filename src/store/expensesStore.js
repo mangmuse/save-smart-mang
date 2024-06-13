@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { createJSONStorage, persist, devtools } from "zustand/middleware";
-
-import initialExpenseData from "../data/fakedata.json";
+import { devtools } from "zustand/middleware";
 
 const useExpensesStore = create(
   devtools(

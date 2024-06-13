@@ -12,7 +12,6 @@ export default function useExpenseQuery(productId) {
     queryKey: ["expense"],
     queryFn: async () => {
       const currentExpense = await expenseApi.getExpense(productId);
-      console.log(currentExpense);
       setIsEditable(currentExpense?.createdBy === user.userId);
       setExpense(currentExpense);
       return currentExpense;

@@ -21,7 +21,6 @@ export default function MyPage() {
     } else {
       setUserInfo((prev) => ({ ...prev, nickname: value }));
     }
-    console.log(userInfo);
   };
 
   const handleEditUser = async (e) => {

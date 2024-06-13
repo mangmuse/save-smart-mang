@@ -4,9 +4,6 @@ import { checkValidate } from "../utils/checkValidate";
 import InputContainer from "../components/InputContainer";
 import Button from "../components/Button";
 import useExpensesStore from "../store/expensesStore";
-import useUserStore from "../store/userStore";
-import { useQuery } from "@tanstack/react-query";
-import expenseApi from "../api/expense.api";
 import useExpenseMutation from "../hooks/useExpenseMutation";
 import useExpenseQuery from "../hooks/useExpenseQuery";
 
