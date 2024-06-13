@@ -1,3 +1,28 @@
 {
-  "expenses": []
+  "expenses": [
+    {
+      "id": "60782896-b4fb-4b49-9f4a-e29711396d16",
+      "createdBy": "xptmxm",
+      "date": "2024-01-01",
+      "item": "qsdqwd",
+      "amount": 123123,
+      "description": "qwdw"
+    },
+    {
+      "id": "caf0d159-7d95-4b70-b806-59e63818022a",
+      "createdBy": "xptmxm",
+      "date": "2024-02-02",
+      "item": "qsdqw",
+      "amount": 12312,
+      "description": "112"
+    },
+    {
+      "id": "9fc4b539-aa41-4c70-a906-00d9157b4d79",
+      "createdBy": "xptmxm",
+      "date": "2024-03-03",
+      "item": "3dsadq",
+      "amount": 1231,
+      "description": "asdqas"
+    }
+  ]
 }

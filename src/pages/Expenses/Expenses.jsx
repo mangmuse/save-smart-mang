@@ -7,7 +7,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import expenseApi from "../../api/expense.api";
 
 export default function Expenses() {
-  const queryClient = useQueryClient();
   const { month } = useParams();
   const expenses = useExpensesStore((state) => state.expenses);
   const setExpenses = useExpensesStore((state) => state.setExpenses);

@@ -8,25 +8,14 @@ import useUserStore from "../../store/userStore";
 import { useQuery } from "@tanstack/react-query";
 import expenseApi from "../../api/expense.api";
 import useExpenseMutation from "../../hooks/useExpenseMutation";
+import useExpenseQuery from "../../hooks/useExpenseQuery";
 
 export default function EditExpense() {
   const { productId } = useParams();
-  const [isEditable, setIsEditable] = useState();
-  const [expense, setExpense] = useState();
-  const user = useUserStore((state) => state.user);
+  const { expense, isEditable } = useExpenseQuery(productId);
   const expenses = useExpensesStore((state) => state.expenses);
   const navigate = useNavigate();
   const { patchExpense, removeExpense } = useExpenseMutation();
-
-  useQuery({
-    queryKey: ["expense"],
-    queryFn: async () => {
-      const expense = await expenseApi.getExpense(productId);
-      setIsEditable(expense?.createdBy === user.userId);
-      setExpense(expense);
-      return expense;
-    },
-  });
 
   const refs = useRef({
     date: null,
