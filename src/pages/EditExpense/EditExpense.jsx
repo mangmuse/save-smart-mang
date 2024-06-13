@@ -5,45 +5,27 @@ import InputContainer from "../../components/\bInputContainer/InputContainer";
 import Button from "../../components/Button/Button";
 import useExpensesStore from "../../store/expensesStore";
 import useUserStore from "../../store/userStore";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import expenseApi from "../../api/expense.api";
+import useExpenseMutation from "../../hooks/useExpenseMutation";
 
 export default function EditExpense() {
+  const { productId } = useParams();
   const [isEditable, setIsEditable] = useState();
   const [expense, setExpense] = useState();
-  const expenses = useExpensesStore((state) => state.expenses);
   const user = useUserStore((state) => state.user);
-  const updateExpense = useExpensesStore((state) => state.updateExpense);
-  const deleteExpense = useExpensesStore((state) => state.deleteExpense);
+  const expenses = useExpensesStore((state) => state.expenses);
   const navigate = useNavigate();
-  const { productId } = useParams();
+  const { patchExpense, removeExpense } = useExpenseMutation();
 
   useQuery({
-    queryKey: ["expnese"],
+    queryKey: ["expense"],
     queryFn: async () => {
       const expense = await expenseApi.getExpense(productId);
       setIsEditable(expense?.createdBy === user.userId);
       setExpense(expense);
       return expense;
     },
-  });
-  const { mutateAsync: patchExpense } = useMutation({
-    mutationFn: async ({ productId, updatedExpense }) => {
-      return await expenseApi.patchExpense(productId, updatedExpense);
-    },
-    onSuccess: (updatedExpense) => {
-      updateExpense(updatedExpense);
-      navigate(-1);
-    },
-    onError: (e) => alert(e),
-  });
-  const { mutateAsync: removeExpense } = useMutation({
-    mutationFn: async (productId) => await expenseApi.removeExpense(productId),
-    onSuccess: () => {
-      deleteExpense(productId);
-      navigate(-1);
-    },
-    onError: (e) => alert(e),
   });
 
   const refs = useRef({

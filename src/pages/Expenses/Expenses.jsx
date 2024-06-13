@@ -12,7 +12,7 @@ export default function Expenses() {
   const expenses = useExpensesStore((state) => state.expenses);
   const setExpenses = useExpensesStore((state) => state.setExpenses);
   useQuery({
-    queryKey: ["expense"],
+    queryKey: ["expenses"],
     queryFn: async () => {
       const data = await expenseApi.getExpenses();
       setExpenses(data);
