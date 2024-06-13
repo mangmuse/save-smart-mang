@@ -7,7 +7,7 @@ import useExpensesStore from "../store/expensesStore";
 import useExpenseMutation from "../hooks/useExpenseMutation";
 import useExpenseQuery from "../hooks/useExpenseQuery";
 
-export default function EditExpense() {
+export default function EditExpensePage() {
   const { productId } = useParams();
   const { expense, isEditable } = useExpenseQuery(productId);
   const expenses = useExpensesStore((state) => state.expenses);

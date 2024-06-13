@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import EditExpense from "../pages/EditExpensePage";
+import EditExpensePage from "../pages/EditExpensePage";
 import ExpenseManager from "../pages/HomePage";
 import Expenses from "../pages/Expenses";
 import ErrorPage from "../pages/ErrorPage";
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "expenses/edit/:productId",
-        element: <EditExpense />,
+        element: <EditExpensePage />,
       },
       {
         path: "auth",
